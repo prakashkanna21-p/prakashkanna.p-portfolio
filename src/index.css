@@ -1,4 +1,3 @@
-/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,26 +24,11 @@
     @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
   }
   
-  .nav-link {
-    @apply relative text-gray-300 hover:text-white transition-colors duration-300;
-  }
-  
-  .nav-link::after {
-    content: '';
-    @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300;
-  }
-  
-  .nav-link:hover::after {
-    @apply w-full;
-  }
-  
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-lg font-semibold 
-           hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 transform hover:-translate-y-1;
+    @apply px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-lg font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 transform hover:-translate-y-1;
   }
   
   .btn-outline {
-    @apply px-6 py-3 border border-primary rounded-lg font-semibold text-primary 
-           hover:bg-primary/10 transition-all duration-300;
+    @apply px-6 py-3 border border-primary rounded-lg font-semibold text-primary hover:bg-primary/10 transition-all duration-300;
   }
 }
