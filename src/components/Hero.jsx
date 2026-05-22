@@ -1,10 +1,37 @@
-// src/components/Hero.jsx
-import React from 'react';
+// src/components/Hero.jsx - Updated version without react-typewriter-effect
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaDownload } from 'react-icons/fa';
-import Typewriter from 'react-typewriter-effect';
 
 const Hero = () => {
+  const [text, setText] = useState('');
+  const [index, setIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  const roles = ['Full Stack Developer', 'Problem Solver', 'Tech Enthusiast', 'Code Creator'];
+  
+  useEffect(() => {
+    const currentRole = roles[index % roles.length];
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting && text === currentRole) {
+        setIsDeleting(true);
+        timeout.delay = 1000;
+      } else if (isDeleting && text === '') {
+        setIsDeleting(false);
+        setIndex((prev) => prev + 1);
+      } else {
+        setText((prev) => 
+          isDeleting 
+            ? currentRole.substring(0, prev.length - 1)
+            : currentRole.substring(0, prev.length + 1)
+        );
+      }
+    }, isDeleting ? 50 : 100);
+    
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, index, roles]);
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Animated Background */}
@@ -33,23 +60,8 @@ const Hero = () => {
           </h1>
           
           <div className="text-3xl md:text-5xl font-semibold mb-6">
-            <Typewriter
-              textStyle={{
-                fontFamily: 'inherit',
-                fontWeight: '600',
-              }}
-              startDelay={100}
-              cursorColor="#6366f1"
-              multiText={[
-                'Full Stack Developer',
-                'Problem Solver',
-                'Tech Enthusiast',
-                'Code Creator'
-              ]}
-              multiTextDelay={2000}
-              typeSpeed={80}
-              backSpeed={50}
-            />
+            <span className="gradient-text">{text}</span>
+            <span className="animate-pulse">|</span>
           </div>
           
           <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-8">
@@ -71,7 +83,7 @@ const Hero = () => {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="https://github.com/prakash"
+              href="https://github.com/prakashkanna21-p"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-outline inline-flex items-center gap-2"
@@ -82,7 +94,7 @@ const Hero = () => {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="https://linkedin.com/in/prakash"
+              href="https://linkedin.com/in/prakashkanna"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-outline inline-flex items-center gap-2"
